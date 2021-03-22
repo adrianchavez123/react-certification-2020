@@ -1,24 +1,8 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import CheckBoxSwitch from '../../CheckBoxSwitch';
-
-const Profile = styled.div`
-  :hover {
-    color: black;
-  }
-  padding-right: 20px;
-  font-size: 2.2rem;
-  cursor: pointer;
-  position: relative;
-`;
-
-const PreferenceContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
+import { Profile, PreferenceContainer } from './Preferences.styles';
 
 function Preferences() {
   const [show, setShow] = useState(false);

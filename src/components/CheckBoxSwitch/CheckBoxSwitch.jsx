@@ -1,10 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const CheckBox = styled.div`
-  display: flex;
-  padding: 0 20px;
-`;
+import { CheckBox } from './CheckBoxSwitch.styles';
 
 function CheckBoxSwitch({ children }) {
   return (
