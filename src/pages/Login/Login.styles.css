@@ -2,11 +2,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #f2f4f4;
 }
+
 .login {
   max-width: 500px;
   width: 80vw;
   border: 2px solid #e8daff;
+  padding-bottom: 30px;
+  background-color: #fafafa;
 }
 
 .login h1 {

@@ -1,1 +1,1 @@
-export { default } from './CheckBoxSwitch';
+export { default } from './CheckBoxSwitch.component';

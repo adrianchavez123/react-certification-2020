@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import youtubeMockVideos from '../../mocks/youtube-videos-mock.json';
-import YoutubeCards from './YoutubeCards';
+import YoutubeCards from './YoutubeCards.component';
 
 describe('All the mockup videos are renders as cards', () => {
   test('it should return the total of mockup videos', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Preferences from './Preferences';
+import Preferences from './Preferences.component';
 
 describe('Test preferences dropdown menu ', () => {
   it("renders application's name", () => {
