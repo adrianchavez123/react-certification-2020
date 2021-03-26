@@ -10,7 +10,6 @@ describe('Test the app can be loaded', () => {
     const navigation = screen.getByRole('navigation');
 
     expect(navigation).toBeInTheDocument();
-    expect(navigation).toBeInTheDocument();
 
     expect(screen.getByRole('link', { name: /REACTBOOTCAMP 2021/i })).toBeInTheDocument();
 

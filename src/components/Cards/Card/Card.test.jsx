@@ -1,10 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render, screen } from '@testing-library/react';
 import Card from './Card';
+import youtubeMockVideos from '../../../mocks/youtube-videos-mock.json';
 
 describe('Test a single card', () => {
   test('Render a card', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<Card />, div);
+    render(<Card />);
+  });
+
+  test('First card is well rendered', () => {
+    const { title, description } = youtubeMockVideos.items[1].snippet;
+    render(<Card title={title} description={description} />);
+
+    screen.getByText(title);
+    screen.getByText(description);
   });
 });

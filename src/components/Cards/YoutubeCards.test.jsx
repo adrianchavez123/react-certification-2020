@@ -4,7 +4,7 @@ import youtubeMockVideos from '../../mocks/youtube-videos-mock.json';
 import YoutubeCards from './YoutubeCards';
 
 describe('All the mockup videos are renders as cards', () => {
-  test('it show return the total of mockup videos', () => {
+  test('it should return the total of mockup videos', () => {
     const { items } = youtubeMockVideos;
     expect(items.length === 25).toBe(true);
   });

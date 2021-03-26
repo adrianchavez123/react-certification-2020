@@ -11,7 +11,7 @@ function Preferences() {
     style += ' show';
   }
   return (
-    <PreferenceContainer>
+    <PreferenceContainer data-testid="preferences">
       <CheckBoxSwitch>Dark mode</CheckBoxSwitch>
       <Profile>
         <FontAwesomeIcon icon={faUserCircle} onClick={() => setShow(!show)} />
