@@ -1,0 +1,37 @@
+1 - Using create-react-app, what do we need to set up for testing?
+
+    create-react-app comes with jest library, so you can start creating your test without care about installing or configuring anything.
+2 - What components are worth to test in your development?
+    In my option components that have side effects should be tested.
+    For tesing, I mean that a component gets some input and that input changes the output of behaivor. it must be tested.
+    For example a component that only renders jsx/html, I don't think we need to test it.
+
+3 - Can you apply TDD once you already created components?
+    Talking about TDD, its better to create a failing test first, then build the necessary code (we can say create the component) to make the test pass and the second step is to refactor the code.
+    When you build the component first, it's possible that tests are not covering all the scenarios because the component is already working and some test cases might be missing.
+
+
+Results after running the tests:
+
+ PASS  src/components/Cards/YoutubeCards.test.jsx
+ PASS  src/components/App/App.test.jsx
+ PASS  src/components/Header/Header.test.jsx
+ PASS  src/components/Cards/Card/Card.test.jsx
+
+Test Suites: 4 passed, 4 total
+Tests:       5 passed, 5 total
+Snapshots:   0 total
+Time:        5.181 s
+Ran all test suites matching /a/i.
+
+Active Filters: filename /a/
+ › Press c to clear filters.
+
+Watch Usage
+ › Press a to run all tests.
+ › Press f to run only failed tests.
+ › Press o to only run tests related to changed files.
+ › Press q to quit watch mode.
+ › Press p to filter by a filename regex pattern.
+ › Press t to filter by a test name regex pattern.
+ › Press Enter to trigger a test run.

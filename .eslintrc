@@ -12,6 +12,14 @@
     "react/prop-types": "off",
     "array-callback-return": "off",
     "consistent-return": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "labelComponents": ["label"],
+        "labelAttributes": ["htmlFor"],
+        "controlComponents": ["input"]
+      }
+    ]
   }
 }
