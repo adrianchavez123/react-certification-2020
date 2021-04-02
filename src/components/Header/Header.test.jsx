@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import Header from './Header.component';
 
@@ -11,17 +12,29 @@ jest.mock('react-router-dom', () => ({
 
 describe("Test  header's menu ", () => {
   it("renders application's name", () => {
-    render(<Header />);
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>
+    );
     expect(screen.getByText('reactbootcamp 2021')).toBeInTheDocument();
   });
 
   it("renders application's searchingbar component", () => {
-    render(<Header />);
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>
+    );
     expect(screen.getByRole('searchbox')).toBeInTheDocument();
   });
 
   it("renders application's preferences component", () => {
-    render(<Header />);
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>
+    );
     expect(screen.getByTestId('preferences')).toBeInTheDocument();
   });
 });

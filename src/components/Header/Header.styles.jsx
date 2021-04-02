@@ -16,7 +16,7 @@ const Nav = styled.nav`
   z-index: 100;
 `;
 
-const NavTitle = styled.a`
+const NavTitle = styled.span`
   @media only screen and (max-width: 900px) {
     font-size: 0.9rem;
   }

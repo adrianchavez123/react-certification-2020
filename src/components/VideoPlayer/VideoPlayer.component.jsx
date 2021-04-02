@@ -19,7 +19,10 @@ import VideoWrapper from '../VideoWrapper/VideoWrapper.component';
 
 function VideoPlayer({ videoId }) {
   const { setAlert } = useVideo();
-  const { video, isLoading, error } = useVideoPlayerApi(videoId);
+  const { video, isLoading, error } = useVideoPlayerApi({
+    type: 'VIDEO_DETAILS',
+    payload: videoId,
+  });
 
   if (error) {
     setAlert({ type: 'danger', message: error });

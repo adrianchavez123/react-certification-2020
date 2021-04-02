@@ -20,8 +20,12 @@ function SearchingBar() {
       return;
     }
     try {
+      setAlert({
+        type: '',
+        message: '',
+      });
       const response = await fetch(
-        `${process.env.REACT_APP_YOUTUBE_DATA_SEARCH_ENDPOINT}${search}&key=${process.env.REACT_APP_YOUTUBE_DATA_KEY}`
+        `${process.env.REACT_APP_YOUTUBE_SEARCH_ENDPOINT}${search}&key=${process.env.REACT_APP_YOUTUBE_DATA_KEY}`
       );
       const data = await response.json();
       if (data?.items) {

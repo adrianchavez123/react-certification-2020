@@ -1,5 +1,5 @@
 import React from 'react';
-import VideoSuggestion from './videoSuggestion';
+import VideoSuggestion from './VideoSuggestion';
 import { useVideo } from '../../providers/Video';
 
 function VideoSuggestions({ videoId }) {

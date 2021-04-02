@@ -1,6 +1,6 @@
 import { useEffect, useCallback, useState } from 'react';
 
-function useVideoPlayerApi(videoId) {
+function useVideoPlayerApi({ type = 'SEARCH', payload = '' }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [tags, setTags] = useState([]);
@@ -21,14 +21,16 @@ function useVideoPlayerApi(videoId) {
   const fetchVideoDetails = useCallback(async () => {
     setIsLoading(true);
 
-    if (!videoId) {
+    if (!payload) {
       setError("Please, make sure video's is correct.");
       return;
     }
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_YOUTUBE_VIDEO_SEARCH_ENDPOINT}${videoId}&key=${process.env.REACT_APP_YOUTUBE_DATA_KEY}`
-      );
+      let endPoint = `${process.env.REACT_APP_YOUTUBE_VIDEO_SEARCH_ENDPOINT}${payload}&key=${process.env.REACT_APP_YOUTUBE_DATA_KEY}`;
+      if (type === 'VIDEO_DETAILS') {
+        endPoint = `${process.env.REACT_APP_YOUTUBE_VIDEO_DETAILS_ENDPOINT}${payload}&key=${process.env.REACT_APP_YOUTUBE_DATA_KEY}`;
+      }
+      const response = await fetch(endPoint);
       const data = await response.json();
       if (data?.items) {
         const [videoDetails] = data.items;
@@ -53,7 +55,7 @@ function useVideoPlayerApi(videoId) {
     } finally {
       setIsLoading(false);
     }
-  }, [videoId]);
+  }, [payload, type]);
 
   useEffect(() => {
     fetchVideoDetails();
