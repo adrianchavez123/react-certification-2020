@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import SearchingBar from './SearchingBar';
@@ -12,10 +11,8 @@ export default function Header() {
       <Bars>
         <FontAwesomeIcon icon={faBars} />
       </Bars>
-      <NavTitle>
-        <Link to="/" role="link">
-          reactbootcamp 2021
-        </Link>
+      <NavTitle to="/" role="link">
+        reactbootcamp 2021
       </NavTitle>
       <SearchingBar />
       <Preferences />

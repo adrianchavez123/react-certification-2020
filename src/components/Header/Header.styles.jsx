@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Nav = styled.nav`
-  width: 100vw;
+  width: 10x0vw;
   height: 10vh;
   background: #0040b3;
   color: #f2f3ff;
@@ -16,7 +17,7 @@ const Nav = styled.nav`
   z-index: 100;
 `;
 
-const NavTitle = styled.span`
+const NavTitle = styled(Link)`
   @media only screen and (max-width: 900px) {
     font-size: 0.9rem;
   }
