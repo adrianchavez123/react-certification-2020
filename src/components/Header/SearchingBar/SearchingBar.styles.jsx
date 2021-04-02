@@ -7,6 +7,7 @@ const Search = styled.input`
   border: 1px solid black;
   font-size: 2.2rem;
   color: #f2f3ff;
+  padding-left: 10%;
 `;
 
 const SearchContainer = styled.div`
@@ -16,4 +17,8 @@ const SearchContainer = styled.div`
   display: flex;
 `;
 
-export { Search, SearchContainer };
+const Label = styled.label`
+  position: relative;
+  display: inline-block;
+`;
+export { Search, SearchContainer, Label };

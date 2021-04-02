@@ -13,7 +13,7 @@ const Nav = styled.nav`
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 100;
 `;
 
 const NavTitle = styled.a`

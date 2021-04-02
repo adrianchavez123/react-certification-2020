@@ -1,27 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Box,
-  Title,
+  SuggestionBox,
   ImageContainer,
   Image,
-  Text,
+  Title,
   DescriptionContainer,
-} from './Card.styles';
+  PublishedDate,
+} from './VideoSuggestion.styles';
 
-function Card({ title, description, image, videoId }) {
+function VideoSuggestion({ title, image, videoId, publishedAt }) {
   return (
     <Link to={`/${videoId}`}>
-      <Box>
+      <SuggestionBox>
         <ImageContainer>
           <Image src={image} alt={title} />
         </ImageContainer>
         <DescriptionContainer>
           <Title>{title}</Title>
-          <Text tooltip={description}>{description}</Text>
+          <PublishedDate>{new Date(publishedAt).toUTCString()}</PublishedDate>
         </DescriptionContainer>
-      </Box>
+      </SuggestionBox>
     </Link>
   );
 }
-export default Card;
+export default VideoSuggestion;

@@ -11,7 +11,9 @@ export default function Header() {
       <Bars>
         <FontAwesomeIcon icon={faBars} />
       </Bars>
-      <NavTitle href={process.env.HOME_URL}>reactbootcamp 2021</NavTitle>
+      <NavTitle role="link" href={process.env.REACT_APP_HOME_URL}>
+        reactbootcamp 2021
+      </NavTitle>
       <SearchingBar />
       <Preferences />
     </Nav>

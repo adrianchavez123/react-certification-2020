@@ -13,7 +13,9 @@ html {
 *::after {
   box-sizing: inherit;
 }
-
+* {
+  text-decoration: none;
+}
 body {
   margin: 0;
   padding: 0;
@@ -113,4 +115,17 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.search-button {
+  position: absolute;
+  left: 2%;
+  top: 15%;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  color: #fff;
+  background: #0040b3;
+  border: 0;
 }

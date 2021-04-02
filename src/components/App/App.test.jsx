@@ -11,7 +11,7 @@ describe('Test the app can be loaded', () => {
 
     expect(navigation).toBeInTheDocument();
 
-    expect(screen.getByRole('link', { name: /REACTBOOTCAMP 2021/i })).toBeInTheDocument();
+    expect(screen.getByText(/REACTBOOTCAMP 2021/i)).toBeInTheDocument();
 
     const heading = screen.getByRole('heading', {
       name: /Welcome to the Challenge!/i,

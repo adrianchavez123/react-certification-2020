@@ -5,6 +5,7 @@ const DescriptionContainer = styled.div`
   flex-direction: column;
   text-overflow: ellipsis;
   color: #003bc7;
+  padding: 0 10px;
 `;
 const Text = styled.p`
   font-size: 0.8rem;
@@ -21,7 +22,7 @@ const Image = styled.img`
 `;
 
 const ImageContainer = styled.div`
-  max-width: 400px;
+  max-width: 150px;
   transform: scale(1);
   width: 100%;
   height: 50%;
@@ -30,24 +31,34 @@ const ImageContainer = styled.div`
   overflow: hidden;
 `;
 
-const Title = styled.h2`
-  font-size: 1rem;
-  line-height: 18px;
+const Title = styled.h4`
+  font-size: 0.8rem;
+  line-height: 1rem;
   color: #003f87;
 `;
 
-const Box = styled.div`
+const PublishedDate = styled.h4`
+  font-size: 0.6rem;
+  color: black;
+`;
+
+const SuggestionBox = styled.div`
   :hover {
-    box-shadow: 2px 5px 10px 1px rgb(0, 0, 0, 0.253);
+    box-shadow: 1px 3px 50px 1px rgb(0, 0, 0, 0.253);
   }
   margin: 0.5rem;
-  max-height: 450px;
-  height: 400px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
   border: 2px solid #e8daff;
   background: #fff;
 `;
 
-export { Box, Title, ImageContainer, Image, Text, DescriptionContainer };
+export {
+  SuggestionBox,
+  Title,
+  ImageContainer,
+  Image,
+  Text,
+  DescriptionContainer,
+  PublishedDate,
+};

@@ -19,7 +19,7 @@ describe('Test rendering login page ', () => {
     expect(heading).toBeInTheDocument();
   });
 
-  it('login page displays login form', () => {
+  it('displays login form', () => {
     render(
       <AuthProvider>
         <Login />

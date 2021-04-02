@@ -1,20 +1,24 @@
 import React from 'react';
 import Card from './Card';
 import Group from './YoutubeCards.styles';
-import youtubeMockVideos from '../../mocks/youtube-videos-mock.json';
+import { useVideo } from '../../providers/Video';
 
 function YoutubeCards() {
-  const { items } = youtubeMockVideos;
+  const { videos } = useVideo();
+
   return (
     <Group>
-      {items.map((item) => (
-        <Card
-          key={item.etag}
-          title={item.snippet.title}
-          description={item.snippet.description}
-          image={item.snippet.thumbnails.high.url}
-        />
-      ))}
+      {videos
+        .filter((item) => item.id?.videoId)
+        .map((item) => (
+          <Card
+            videoId={item.id.videoId}
+            key={item.id.videoId}
+            title={item.snippet.title}
+            description={item.snippet.description}
+            image={item.snippet.thumbnails.high.url}
+          />
+        ))}
     </Group>
   );
 }
