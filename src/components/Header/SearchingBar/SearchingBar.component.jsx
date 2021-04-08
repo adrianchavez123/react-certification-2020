@@ -2,27 +2,31 @@ import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Search, SearchContainer, Label } from './SearchingBar.styles';
-import { useVideo } from '../../../providers/Video';
+import { Search, SearchContainer, Label, SearchingButton } from './SearchingBar.styles';
+import { useVideo, actions } from '../../../state/Video';
 
 function SearchingBar() {
-  const { search, setSearch, setVideos, setAlert } = useVideo();
+  const { state, dispatch } = useVideo();
+  const { search } = state;
   const history = useHistory();
   const { videoId } = useParams();
 
   const searchVideos = async (e) => {
     e.preventDefault();
     if (!search) {
-      setAlert({
-        type: 'success',
-        message: 'Please write something in the searchbox first. :)',
+      dispatch({
+        type: actions.displayError,
+        payload: {
+          type: 'success',
+          message: 'Please write something in the searchbox first. :)',
+        },
       });
       return;
     }
     try {
-      setAlert({
-        type: '',
-        message: '',
+      dispatch({
+        type: actions.closeDialog,
+        payload: {},
       });
       const response = await fetch(
         `${process.env.REACT_APP_YOUTUBE_SEARCH_ENDPOINT}${search}&key=${process.env.REACT_APP_YOUTUBE_DATA_KEY}`
@@ -30,7 +34,10 @@ function SearchingBar() {
       const data = await response.json();
       if (data?.items) {
         const { items: videos } = data;
-        setVideos(videos);
+        dispatch({
+          type: actions.videoList,
+          payload: { videos },
+        });
         if (videoId) {
           history.push('/');
         }
@@ -40,9 +47,20 @@ function SearchingBar() {
         throw new Error('Something went wrong');
       }
     } catch (error) {
-      setAlert({ type: 'danger', message: error.message });
+      dispatch({
+        type: actions.displayError,
+        payload: {
+          type: 'danger',
+          message: error.message,
+        },
+      });
     } finally {
-      setSearch('');
+      dispatch({
+        type: actions.searchVideo,
+        payload: {
+          search: '',
+        },
+      });
     }
   };
 
@@ -54,11 +72,18 @@ function SearchingBar() {
             type="search"
             value={search}
             placeholder="Search a video"
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) =>
+              dispatch({
+                type: actions.searchVideo,
+                payload: {
+                  search: e.target.value,
+                },
+              })
+            }
           />
-          <button name="search" type="submit" className="search-button" title="search">
+          <SearchingButton name="search" type="submit" title="search">
             <FontAwesomeIcon icon={faSearch} />
-          </button>
+          </SearchingButton>
         </Label>
       </form>
     </SearchContainer>

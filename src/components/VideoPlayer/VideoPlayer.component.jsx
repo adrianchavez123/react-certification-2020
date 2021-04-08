@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
-import { useVideo } from '../../providers/Video';
+import { useVideo, actions } from '../../state/Video';
 import useVideoPlayerApi from '../../hooks/useVideoPlayerApi';
 import VideoSuggestions from '../VideoSuggestions';
 import {
@@ -14,18 +14,26 @@ import {
   Tags,
   Tag,
   VideoRating,
+  VideoTitle,
 } from './VideoPlayer.styles';
 import VideoWrapper from '../VideoWrapper/VideoWrapper.component';
 
 function VideoPlayer({ videoId }) {
-  const { setAlert } = useVideo();
+  const { dispatch } = useVideo();
   const { video, isLoading, error } = useVideoPlayerApi({
     type: 'VIDEO_DETAILS',
     payload: videoId,
   });
 
   if (error) {
-    setAlert({ type: 'danger', message: error });
+    // setAlert({ type: 'danger', message: error });
+    dispatch({
+      type: actions.displayError,
+      payload: {
+        type: 'danger',
+        message: error,
+      },
+    });
   }
 
   return (
@@ -41,7 +49,7 @@ function VideoPlayer({ videoId }) {
           <p>loading...</p>
         ) : (
           <VideoDescription>
-            <h1>{video.title}</h1>
+            <VideoTitle>{video.title}</VideoTitle>
             <VideoStatistics>
               <Tags>
                 {video?.tags ? video.tags.map((tag) => <Tag key={tag}>{tag}</Tag>) : null}

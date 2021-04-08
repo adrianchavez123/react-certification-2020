@@ -9,6 +9,7 @@ const VideoPlayerContainer = styled.div`
   grid-template-areas:
     'video   suggestions'
     'info   suggestions';
+  background-color: ${(props) => props.theme.pageBackground};
 
   @media only screen and (max-width: 960px) {
     grid-template-columns: 1fr;
@@ -23,15 +24,15 @@ const VideoPlayerContainer = styled.div`
 
 const Video = styled.div`
   grid-area: video;
-  border-bottom: 1px solid #576ff5;
-  border-right: 1px solid #576ff5;
-  box-shadow: 0px 5px 0px 2px #f2f3ff;
+  border-bottom: 1px solid ${(props) => props.theme.navBackground};
+  border-right: 1px solid ${(props) => props.theme.navBackground};
+  box-shadow: 0px 5px 0px 2px ${(props) => props.theme.navFontColor};
 `;
 
 const AsideSuggestions = styled.div`
   grid-area: suggestions;
   overflow: auto;
-  border-left: 2px solid #576ff5;
+  border-left: 2px solid ${(props) => props.theme.navBackground};
 `;
 
 const Info = styled.div`
@@ -44,6 +45,9 @@ const VideoDescription = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 1% 5%;
+  p {
+    color: ${(props) => props.theme.videoParagraphColor};
+  }
 `;
 
 const VideoStatistics = styled.div`
@@ -53,6 +57,7 @@ const VideoStatistics = styled.div`
   font-size: 0.8rem;
   justify-content: space-between;
   align-items: center;
+  color: ${(props) => props.theme.videoParagraphColor};
 `;
 
 const Tags = styled.div`
@@ -72,6 +77,12 @@ const VideoRating = styled.div`
   width: 40%;
 `;
 
+const VideoTitle = styled.h1`
+  font-weight: 300;
+  color: ${(props) => props.theme.titleColor};
+  text-align: center;
+`;
+
 export {
   VideoPlayerContainer,
   Video,
@@ -82,4 +93,5 @@ export {
   Tags,
   Tag,
   VideoRating,
+  VideoTitle,
 };

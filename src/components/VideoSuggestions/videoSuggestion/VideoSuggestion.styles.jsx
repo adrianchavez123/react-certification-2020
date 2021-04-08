@@ -4,13 +4,12 @@ const DescriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
   text-overflow: ellipsis;
-  color: #003bc7;
   padding: 0 10px;
 `;
 const Text = styled.p`
   font-size: 0.8rem;
   line-height: 18px;
-  color: #8695fa;
+  color: ${(props) => props.theme.paragraphColor};
 `;
 
 const Image = styled.img`
@@ -34,12 +33,12 @@ const ImageContainer = styled.div`
 const Title = styled.h4`
   font-size: 0.8rem;
   line-height: 1rem;
-  color: #003f87;
+  color: ${(props) => props.theme.titleColor};
 `;
 
 const PublishedDate = styled.h4`
   font-size: 0.6rem;
-  color: black;
+  color: ${(props) => props.theme.paragraphColor};
 `;
 
 const SuggestionBox = styled.div`
@@ -50,7 +49,7 @@ const SuggestionBox = styled.div`
   display: flex;
   flex-direction: row;
   border: 2px solid #e8daff;
-  background: #fff;
+  background-color: ${(props) => props.theme.pageBackground};
 `;
 
 export {

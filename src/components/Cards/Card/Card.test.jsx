@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import Card from './Card.component';
 import youtubeMockVideos from '../../../mocks/youtube-videos-mock.json';
@@ -7,18 +7,18 @@ import youtubeMockVideos from '../../../mocks/youtube-videos-mock.json';
 describe('Test a single card', () => {
   test('Render a card', () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <Card />
-      </BrowserRouter>
+      </MemoryRouter>
     );
   });
 
   test('First card is well rendered', () => {
     const { title, description } = youtubeMockVideos.items[1].snippet;
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <Card title={title} description={description} />
-      </BrowserRouter>
+      </MemoryRouter>
     );
 
     screen.getByText(title);

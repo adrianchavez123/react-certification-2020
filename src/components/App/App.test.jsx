@@ -2,6 +2,10 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App.component';
 
+jest.mock('../../state/User', () => ({
+  useUserAccount: () => ({ state: { theme: 'light' } }),
+}));
+
 describe('Test the app can be loaded', () => {
   it('renders the app', () => {
     render(<App />);

@@ -1,9 +1,10 @@
 import React from 'react';
 import VideoSuggestion from './VideoSuggestion';
-import { useVideo } from '../../providers/Video';
+import { useVideo } from '../../state/Video';
 
 function VideoSuggestions({ videoId }) {
-  const { videos } = useVideo();
+  const { state } = useVideo();
+  const { videos } = state;
 
   return (
     <div data-testid="video-suggestions">

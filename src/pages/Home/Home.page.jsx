@@ -1,25 +1,30 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import Header from '../../components/Header';
 import VideoList from '../../components/VideoList';
 import Dialog from '../../components/Dialog';
 import VideoPlayer from '../../components/VideoPlayer';
-import { useVideo } from '../../providers/Video';
+import { useVideo } from '../../state/Video';
+import { HomeTitle, Main } from './Home.styles';
 
 function HomePage() {
-  const { alert } = useVideo();
+  const { state } = useVideo();
+  const { alert } = state;
   const { videoId } = useParams();
+  if (videoId === 'secret') {
+    return <Redirect to="/" />;
+  }
   let content = (
-    <>
-      <h1>Welcome to the Challenge!</h1>
+    <Main>
+      <HomeTitle>Welcome to the Challenge!</HomeTitle>
       <VideoList />
-    </>
+    </Main>
   );
   if (videoId) {
     content = <VideoPlayer videoId={videoId} />;
   }
   return (
-    <div style={{ position: 'relative' }}>
+    <div>
       <Header />
       {alert.message ? <Dialog message={alert.message} type={alert.type} /> : null}
       {content}

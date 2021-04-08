@@ -4,7 +4,8 @@ import SearchingBar from './SearchingBar.component';
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
-    json: () => Promise.resolve({ rates: { CAD: 1.42 } }),
+    json: () =>
+      Promise.resolve({ videos: [{ videoId: 'efgtf' }, { videoId: 'efwsdrs' }] }),
   })
 );
 
@@ -13,6 +14,10 @@ jest.mock('react-router-dom', () => ({
   useParams: () => ({
     videoId: 'HYyRZiwBWc8',
   }),
+}));
+
+jest.mock('../../../state/Video', () => ({
+  useVideo: () => ({ state: { search: '' }, dispatch: () => {} }),
 }));
 
 describe('Test the searching bar is displayed', () => {

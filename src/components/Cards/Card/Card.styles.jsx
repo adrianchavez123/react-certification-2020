@@ -9,7 +9,7 @@ const DescriptionContainer = styled.div`
 const Text = styled.p`
   font-size: 0.8rem;
   line-height: 18px;
-  color: #8695fa;
+  color: ${(props) => props.theme.paragraphColor};
 `;
 
 const Image = styled.img`
@@ -33,7 +33,7 @@ const ImageContainer = styled.div`
 const Title = styled.h2`
   font-size: 1rem;
   line-height: 18px;
-  color: #003f87;
+  color: ${(props) => props.theme.titleColor};
 `;
 
 const Box = styled.div`
@@ -47,7 +47,7 @@ const Box = styled.div`
   flex-direction: column;
   align-items: center;
   border: 2px solid #e8daff;
-  background: #fff;
+  background: ${(props) => props.theme.pageBackground};
 `;
 
 export { Box, Title, ImageContainer, Image, Text, DescriptionContainer };

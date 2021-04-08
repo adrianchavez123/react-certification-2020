@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { Alert, CloseButton, Span } from './Dialog.styles';
-import { useVideo } from '../../providers/Video';
+import { useVideo, actions } from '../../state/Video';
 
 const alertTypes = [
   { type: 'success', color: '#C3E6CD', border: '#155724' },
@@ -10,7 +10,7 @@ const alertTypes = [
 ];
 
 function Dialog({ message, type }) {
-  const { setAlert } = useVideo();
+  const { dispatch } = useVideo();
   return (
     <Alert role="dialog" theme={alertTypes.find((theme) => theme.type === type)}>
       <Span>{message}</Span>
@@ -18,7 +18,12 @@ function Dialog({ message, type }) {
         name="close-alert"
         type="button"
         title="close"
-        onClick={() => setAlert({ message: null, type: null })}
+        onClick={() =>
+          dispatch({
+            type: actions.closeDialog,
+            payload: {},
+          })
+        }
       >
         <FontAwesomeIcon icon={faTimesCircle} />
       </CloseButton>

@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const Nav = styled.nav`
-  width: 10x0vw;
+  width: 100vw;
   height: 10vh;
-  background: #0040b3;
-  color: #f2f3ff;
-  box-shadow: 0px 0px 2px 2px #576ff5;
+  background: ${(props) => props.theme.navBackground};
+  color: ${(props) => props.theme.navFontColor};
+  box-shadow: 0px 0px 2px 2px ${(props) => props.theme.navBorderColor};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -25,7 +25,7 @@ const NavTitle = styled(Link)`
     font-size: 0.8rem;
   }
   :hover {
-    color: black;
+    color: ${(props) => props.theme.navHoverFontColor};
   }
   font-size: 1.2rem;
   text-transform: uppercase;
@@ -36,7 +36,7 @@ const NavTitle = styled(Link)`
 
 const Bars = styled.div`
   :hover {
-    color: black;
+    color: ${(props) => props.theme.navHoverFontColor};
     cursor: pointer;
   }
   font-size: 2.2rem;

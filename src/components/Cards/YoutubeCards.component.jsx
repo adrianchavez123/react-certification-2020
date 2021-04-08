@@ -1,11 +1,11 @@
 import React from 'react';
 import Card from './Card';
 import Group from './YoutubeCards.styles';
-import { useVideo } from '../../providers/Video';
+import { useVideo } from '../../state/Video';
 
 function YoutubeCards() {
-  const { videos } = useVideo();
-
+  const { state } = useVideo();
+  const { videos } = state;
   return (
     <Group>
       {videos
