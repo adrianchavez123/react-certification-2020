@@ -69,7 +69,10 @@
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "/src/serviceWorker.js",
-      "/src/index.js"
+      "/src/index.js",
+      "/utils/",
+      "/state/User/User.reducer.jsx",
+      "/state/Video/Video.reducer.jsx"
     ]
   }
 }
