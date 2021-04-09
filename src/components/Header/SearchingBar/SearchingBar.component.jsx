@@ -67,8 +67,9 @@ function SearchingBar() {
   return (
     <SearchContainer>
       <form onSubmit={searchVideos}>
-        <Label>
+        <Label htmlFor="search">
           <Search
+            name="search"
             type="search"
             value={search}
             placeholder="Search a video"
@@ -81,7 +82,7 @@ function SearchingBar() {
               })
             }
           />
-          <SearchingButton name="search" type="submit" title="search">
+          <SearchingButton name="search-btn" type="submit" title="search">
             <FontAwesomeIcon icon={faSearch} />
           </SearchingButton>
         </Label>

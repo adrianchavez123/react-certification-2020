@@ -14,8 +14,12 @@ function Preferences() {
     <PreferenceContainer data-testid="preferences">
       <CheckBoxSwitch>Dark mode</CheckBoxSwitch>
       <Profile>
-        <FontAwesomeIcon icon={faUserCircle} onClick={() => setShow(!show)} />
-        <div className={style}>
+        <FontAwesomeIcon
+          data-testid="preferences-icon"
+          icon={faUserCircle}
+          onClick={() => setShow(!show)}
+        />
+        <div data-testid="preferences-dropdown" className={style}>
           <a href="/login">Login</a>
         </div>
       </Profile>

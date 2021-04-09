@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import SearchingBar from './SearchingBar.component';
 
 global.fetch = jest.fn(() =>
@@ -18,6 +19,9 @@ jest.mock('react-router-dom', () => ({
 
 jest.mock('../../../state/Video', () => ({
   useVideo: () => ({ state: { search: '' }, dispatch: () => {} }),
+  actions: {
+    displayError: () => {},
+  },
 }));
 
 describe('Test the searching bar is displayed', () => {
@@ -32,5 +36,17 @@ describe('Test the searching bar is displayed', () => {
     expect(screen.getByRole('button', { name: 'search' })).toBeInTheDocument();
   });
 
-  it('triggers change on click button', () => {});
+  it('clicks are search', async () => {
+    render(<SearchingBar />);
+
+    expect(screen.getByRole('searchbox')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button'));
+  });
+
+  it('searches a video', async () => {
+    render(<SearchingBar />);
+    userEvent.type(screen.getByRole('searchbox'), 'wizeline');
+    userEvent.click(screen.getByRole('button'));
+    expect(await screen.getByRole('searchbox', '')).toBeInTheDocument();
+  });
 });
