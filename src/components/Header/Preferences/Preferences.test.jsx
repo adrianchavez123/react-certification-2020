@@ -1,5 +1,5 @@
 import React from 'react';
-import { getByText, render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import Preferences from './Preferences.component';
 
 jest.mock('../../../state/User', () => ({

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-const HomeTitle = styled.h1`
+const Title = styled.h1`
   font-weight: 300;
   color: ${(props) => props.theme.titleColor};
   text-align: center;
 `;
 
-const Main = styled.div.attrs((props) => ({
+const FavoriteSection = styled.div.attrs((props) => ({
   updateGrid: props.updateGrid,
 }))`
   border: 1px solid ${(props) => props.theme.navBorderColor};
@@ -15,9 +15,12 @@ const Main = styled.div.attrs((props) => ({
   grid-template-columns: ${(props) => (props.updateGrid ? '20% 1fr' : '1fr')};
 `;
 
-const HomeContainer = styled.div`
+const FavoritesContainer = styled.div`
   height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   overflow: auto;
 `;
 
-export { HomeTitle, Main, HomeContainer };
+export { Title, FavoriteSection, FavoritesContainer };

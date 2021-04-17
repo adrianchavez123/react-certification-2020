@@ -5,4 +5,5 @@ export default {
   removeFavoriteVideo: 'REMOVE_FAVORITE_VIDEO',
   clearFavoriteVideos: 'CLEAR_FAVORITE_VIDEOS',
   setTheme: 'SET_THEME',
+  showMenu: 'SHOW_MENU',
 };

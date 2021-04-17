@@ -14,19 +14,24 @@ function reducer(state, action) {
         ...state,
         authenticated: action.payload.authenticated || false,
         email: action.payload.email || null,
+        showMenu: action.payload.showMenu || false,
+        favoriteVideos: [],
+        theme: 'light',
       };
     }
     case actions.addFavoriteVideo: {
       return {
         ...state,
-        favoriteVideos: [...state.favoriteVideos, action.payload],
+        favoriteVideos: [...state.favoriteVideos, action.payload.addVideo],
       };
     }
     case actions.removeFavoriteVideo: {
-      const { videoId } = action.payload;
+      const { removeVideo } = action.payload;
       return {
         ...state,
-        favoriteVideos: state.favoriteVideos.filter((video) => video.videoId === videoId),
+        favoriteVideos: state.favoriteVideos.filter(
+          (video) => video.videoId !== removeVideo
+        ),
       };
     }
     case actions.clearFavoriteVideos: {
@@ -39,6 +44,12 @@ function reducer(state, action) {
       return {
         ...state,
         theme: action.payload.theme,
+      };
+    }
+    case actions.showMenu: {
+      return {
+        ...state,
+        showMenu: action.payload.showMenu,
       };
     }
     default:

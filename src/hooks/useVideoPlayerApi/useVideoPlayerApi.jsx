@@ -1,23 +1,38 @@
 import { useEffect, useCallback, useState } from 'react';
 
 function useVideoPlayerApi({ type = 'SEARCH', payload = '' }) {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [tags, setTags] = useState([]);
-  const [likes, setLikes] = useState(0);
-  const [dislikes, setDislikes] = useState(0);
-  const [views, setViews] = useState(0);
+  const [response, setResponse] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const video = {
-    title,
-    description,
-    tags,
-    likes,
-    dislikes,
-    views,
+  const buildVideoDetailsResponse = (data) => {
+    const {
+      title,
+      description,
+      tags,
+      thumbnails: {
+        default: { url },
+      },
+    } = data.snippet;
+    const { viewCount, likeCount, dislikeCount } = data.statistics;
+    return {
+      title,
+      description,
+      tags,
+      likes: likeCount,
+      dislikes: dislikeCount,
+      views: viewCount,
+      url,
+    };
   };
+
+  const buildResponse = useCallback(
+    (data) => {
+      return type === 'VIDEO_DETAILS' ? buildVideoDetailsResponse(data) : null;
+    },
+    [type]
+  );
+
   const fetchVideoDetails = useCallback(async () => {
     setIsLoading(true);
 
@@ -30,22 +45,12 @@ function useVideoPlayerApi({ type = 'SEARCH', payload = '' }) {
       if (type === 'VIDEO_DETAILS') {
         endPoint = `${process.env.REACT_APP_YOUTUBE_VIDEO_DETAILS_ENDPOINT}${payload}&key=${process.env.REACT_APP_YOUTUBE_DATA_KEY}`;
       }
-      const response = await fetch(endPoint);
-      const data = await response.json();
+      const youtubeResponse = await fetch(endPoint);
+      const data = await youtubeResponse.json();
       if (data?.items) {
         const [videoDetails] = data.items;
-        const {
-          title: videoTitle,
-          description: videoDescription,
-          tags: videoTags,
-        } = videoDetails.snippet;
-        const { viewCount, likeCount, dislikeCount } = videoDetails.statistics;
-        setTitle(videoTitle);
-        setDescription(videoDescription);
-        setTags(videoTags);
-        setLikes(likeCount);
-        setDislikes(dislikeCount);
-        setViews(viewCount);
+
+        setResponse(buildResponse(videoDetails));
       }
       if (data?.error) {
         throw new Error(data.error.message);
@@ -55,13 +60,13 @@ function useVideoPlayerApi({ type = 'SEARCH', payload = '' }) {
     } finally {
       setIsLoading(false);
     }
-  }, [payload, type]);
+  }, [payload, type, buildResponse]);
 
   useEffect(() => {
     fetchVideoDetails();
   }, [fetchVideoDetails]);
 
-  return { video, isLoading, error };
+  return { response, isLoading, error };
 }
 
 export default useVideoPlayerApi;

@@ -72,7 +72,7 @@ describe('useVideoPlayerApi', () => {
 
       await waitForNextUpdate();
 
-      expect(result.current.video).toHaveProperty('title');
+      expect(result.current).toHaveProperty('response');
     });
   });
 

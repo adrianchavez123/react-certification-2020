@@ -1,5 +1,5 @@
 import React from 'react';
-import VideoSuggestion from './VideoSuggestion';
+import VideoItem from '../VideoList/VideoItem';
 import { useVideo } from '../../state/Video';
 
 function VideoSuggestions({ videoId }) {
@@ -11,7 +11,7 @@ function VideoSuggestions({ videoId }) {
       {videos
         .filter((item) => item.id?.videoId && item.id?.videoId !== videoId)
         .map((video) => (
-          <VideoSuggestion
+          <VideoItem
             key={video.id.videoId}
             videoId={video.id.videoId}
             title={video.snippet.title}

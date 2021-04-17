@@ -1,5 +1,10 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
+const ItemLink = styled(Link)`
+  display: inline-block;
+  width: 100%;
+`;
 const DescriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -45,9 +50,10 @@ const SuggestionBox = styled.div`
   :hover {
     box-shadow: 1px 3px 50px 1px rgb(0, 0, 0, 0.253);
   }
-  margin: 0.5rem;
+  margin: 1em;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   border: 2px solid #e8daff;
   background-color: ${(props) => props.theme.pageBackground};
 `;
@@ -60,4 +66,5 @@ export {
   Text,
   DescriptionContainer,
   PublishedDate,
+  ItemLink,
 };

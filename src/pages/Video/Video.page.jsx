@@ -1,14 +1,16 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import Header from '../../components/Header';
-import VideoGrid from '../../components/VideoGrid';
 import Dialog from '../../components/Dialog';
+import VideoPlayer from '../../components/VideoPlayer';
 import PrivateAsideMenu from '../../components/PrivateAsideMenu';
 
 import { useVideo } from '../../state/Video';
 import { useUserAccount } from '../../state/User';
-import { HomeTitle, Main, HomeContainer } from './Home.styles';
+import { Main } from './Video.styles';
 
-function HomePage() {
+function Video() {
+  const { videoId } = useParams();
   const {
     state: { alert },
   } = useVideo();
@@ -17,20 +19,16 @@ function HomePage() {
   } = useUserAccount();
 
   const updateGrid = authenticated && showMenu;
-
   return (
     <div>
       <Header />
       {alert.message ? <Dialog message={alert.message} type={alert.type} /> : null}
       <Main updateGrid={updateGrid}>
         {showMenu ? <PrivateAsideMenu /> : null}
-        <HomeContainer>
-          <HomeTitle>Welcome to the Challenge!</HomeTitle>
-          <VideoGrid />
-        </HomeContainer>
+        <VideoPlayer videoId={videoId} showMenu={showMenu} />
       </Main>
     </div>
   );
 }
 
-export default HomePage;
+export default Video;

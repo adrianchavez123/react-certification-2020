@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from './Card';
-import Group from './YoutubeCards.styles';
+import Group from './Cards.styles';
 import { useVideo } from '../../state/Video';
 
 function YoutubeCards() {

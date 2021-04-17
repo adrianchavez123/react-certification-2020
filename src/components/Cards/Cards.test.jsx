@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import youtubeMockVideos from '../../mocks/youtube-videos-mock.json';
-import YoutubeCards from './YoutubeCards.component';
+import Cards from './Cards.component';
 
 const mockUseVideo = [
   {
@@ -36,7 +36,7 @@ describe('All the mockup videos are renders as cards', () => {
   test("Render cards' container", () => {
     render(
       <MemoryRouter>
-        <YoutubeCards />
+        <Cards />
       </MemoryRouter>
     );
   });
@@ -44,7 +44,7 @@ describe('All the mockup videos are renders as cards', () => {
   test("Render cards' container with children", () => {
     render(
       <MemoryRouter>
-        <YoutubeCards />
+        <Cards />
       </MemoryRouter>
     );
     expect(screen.getAllByRole('link').length).toBe(2);

@@ -7,6 +7,7 @@ function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { state, dispatch } = useUserAccount();
+
   const history = useHistory();
 
   if (state.authenticated) {
@@ -22,7 +23,7 @@ function LoginPage() {
         email: username,
       },
     });
-    history.push('/secret');
+    history.push('/');
   }
 
   return (

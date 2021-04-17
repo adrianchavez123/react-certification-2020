@@ -8,6 +8,7 @@ const initialState = {
   email: '',
   theme: 'light',
   favoriteVideos: [],
+  showMenu: false,
 };
 
 jest.mock('./User.reducer.jsx', () => jest.fn());
@@ -27,6 +28,7 @@ describe('useUserAccount', () => {
       email: '',
       theme: 'light',
       favoriteVideos: [],
+      showMenu: false,
     });
   });
   it('throws expection when context is null', async () => {
@@ -69,6 +71,7 @@ describe('test reducer responses', () => {
       email: 'test@gmail.com',
       theme: 'light',
       favoriteVideos: [],
+      showMenu: false,
     });
   });
 });
@@ -81,5 +84,6 @@ describe('actions', () => {
     removeFavoriteVideo: 'REMOVE_FAVORITE_VIDEO',
     clearFavoriteVideos: 'CLEAR_FAVORITE_VIDEOS',
     setTheme: 'SET_THEME',
+    showMenu: 'SHOW_MENU',
   });
 });

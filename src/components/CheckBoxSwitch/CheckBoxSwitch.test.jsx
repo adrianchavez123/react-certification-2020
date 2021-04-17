@@ -1,14 +1,16 @@
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
 import { render, screen, fireEvent } from '@testing-library/react';
+import themes from '../App/Theme';
 import CheckBoxSwitch from './CheckBoxSwitch.component';
 
 jest.mock('../../state/User', () => ({
   useUserAccount: () => ({
-    state: { theme: 'light', authenticated: false, email: '' },
+    state: { theme: 'dark', authenticated: false, email: '' },
     dispatch: () => {},
   }),
   actions: {
-    setTheme: 'newTheme',
+    setTheme: 'light',
   },
 }));
 
@@ -35,6 +37,16 @@ describe('Test checkboxswitch is well rendered', () => {
     fireEvent.click(check);
     expect(check).toBeInTheDocument();
 
+    expect(check).toBeChecked();
+  });
+  it('displays the checkbok selected when dark mode is active', () => {
+    render(
+      <ThemeProvider theme={themes.dark}>
+        <CheckBoxSwitch>Dark mode</CheckBoxSwitch>
+      </ThemeProvider>
+    );
+    const check = screen.getByRole('checkbox');
+    expect(check).toBeInTheDocument();
     expect(check).toBeChecked();
   });
 });
