@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Profile = styled.div`
   :hover {
-    color: black;
+    color: ${(props) => props.theme.navHoverFontColor};
   }
   padding-right: 20px;
   font-size: 2.2rem;

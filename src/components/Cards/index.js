@@ -1,1 +1,1 @@
-export { default } from './YoutubeCards.component';
+export { default } from './Cards.component';

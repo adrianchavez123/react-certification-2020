@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Nav = styled.nav`
   width: 100vw;
   height: 10vh;
-  background: #0040b3;
-  color: #f2f3ff;
-  box-shadow: 0px 0px 2px 2px #576ff5;
+  background: ${(props) => props.theme.navBackground};
+  color: ${(props) => props.theme.navFontColor};
+  box-shadow: 0px 0px 2px 2px ${(props) => props.theme.navBorderColor};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -13,10 +14,10 @@ const Nav = styled.nav`
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 100;
 `;
 
-const NavTitle = styled.a`
+const NavTitle = styled(Link)`
   @media only screen and (max-width: 900px) {
     font-size: 0.9rem;
   }
@@ -24,7 +25,7 @@ const NavTitle = styled.a`
     font-size: 0.8rem;
   }
   :hover {
-    color: black;
+    color: ${(props) => props.theme.navHoverFontColor};
   }
   font-size: 1.2rem;
   text-transform: uppercase;
@@ -35,7 +36,7 @@ const NavTitle = styled.a`
 
 const Bars = styled.div`
   :hover {
-    color: black;
+    color: ${(props) => props.theme.navHoverFontColor};
     cursor: pointer;
   }
   font-size: 2.2rem;
