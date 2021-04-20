@@ -32,3 +32,11 @@ describe('Home page is loaded', () => {
     expect(screen.getByText(/Dark mode/i)).toBeInTheDocument();
   });
 });
+
+describe("Click theme's checkbox", () => {
+  it('renders the app', () => {});
+});
+
+describe('Searching a videos', () => {
+  it("updates home card's at search", () => {});
+});

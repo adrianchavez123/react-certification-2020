@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, Redirect } from 'react-router';
 import { useUserAccount, actions } from '../../state/User';
+import loginApi from '../../utils/login.api';
 import './Login.styles.css';
 
 function LoginPage() {
@@ -16,14 +17,24 @@ function LoginPage() {
 
   function authenticate(event) {
     event.preventDefault();
-    dispatch({
-      type: actions.login,
-      payload: {
-        authenticated: true,
-        email: username,
-      },
-    });
-    history.push('/');
+    loginApi(username, password)
+      .then((user) => {
+        const { avatarUrl, name } = user;
+        dispatch({
+          type: actions.login,
+          payload: {
+            authenticated: true,
+            email: username,
+            name,
+            avatarUrl,
+            closeModal: true,
+          },
+        });
+        history.goBack();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (

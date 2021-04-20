@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useVideo, actions } from '../../state/Video';
@@ -15,6 +16,7 @@ import {
 } from './VideoPlayer.styles';
 
 function VideoPlayer({ videoId, showMenu }) {
+  const history = useHistory();
   const { dispatch } = useVideo();
   const {
     state: { favoriteVideos },
@@ -36,15 +38,7 @@ function VideoPlayer({ videoId, showMenu }) {
       {` ${favoriteVerb} Favorites`}
     </>
   );
-  if (error) {
-    dispatch({
-      type: actions.displayError,
-      payload: {
-        type: 'danger',
-        message: error,
-      },
-    });
-  }
+
   const updateFavoriteList = () => {
     const videoIndex = favoriteVideos.findIndex((v) => {
       return v.videoId === videoId;
@@ -72,10 +66,23 @@ function VideoPlayer({ videoId, showMenu }) {
   };
 
   useEffect(() => {
+    if (error) {
+      dispatch({
+        type: actions.displayError,
+        payload: {
+          type: 'danger',
+          message: `Something when wrong, Error(${error}), please watch another video.`,
+        },
+      });
+      history.push('/');
+    }
+  }, [error, dispatch, history]);
+
+  useEffect(() => {
     const videoIndex = favoriteVideos.findIndex((v) => {
       return v.videoId === videoId;
     });
-    if (videoIndex > 0) {
+    if (videoIndex > -1) {
       setFavoriteVerb('remove from');
     } else {
       setFavoriteVerb('add to');

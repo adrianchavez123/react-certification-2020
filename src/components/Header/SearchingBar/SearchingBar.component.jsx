@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Search, SearchContainer, Label, SearchingButton } from './SearchingBar.styles';
@@ -9,7 +9,6 @@ function SearchingBar() {
   const { state, dispatch } = useVideo();
   const { search } = state;
   const history = useHistory();
-  const { videoId } = useParams();
 
   const searchVideos = async (e) => {
     e.preventDefault();
@@ -38,9 +37,8 @@ function SearchingBar() {
           type: actions.videoList,
           payload: { videos },
         });
-        if (videoId) {
-          history.push('/');
-        }
+
+        history.push('/');
       } else if (data?.error) {
         throw new Error(data.error.message);
       } else {

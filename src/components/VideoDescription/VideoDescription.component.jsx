@@ -9,17 +9,23 @@ import {
   VideoStatistics,
   VideoRating,
 } from './VideoDescription.styles';
+import { useUserAccount } from '../../state/User';
 
 function VideoDescription({ video, updateFavoriteList, favoriteLabel }) {
+  const {
+    state: { authenticated },
+  } = useUserAccount();
   return (
     <VideoDescriptionContainer>
       <VideoTitle>{video.title}</VideoTitle>
       <VideoStatistics>
         <Tags labels={video.tags} />
         <VideoRating>
-          <MiniStyledButton type="button" onClick={updateFavoriteList}>
-            {favoriteLabel}
-          </MiniStyledButton>
+          {authenticated && (
+            <MiniStyledButton type="button" onClick={updateFavoriteList}>
+              {favoriteLabel}
+            </MiniStyledButton>
+          )}
           <span>
             Likes <FontAwesomeIcon icon={faThumbsUp} /> : {video.likes}
           </span>

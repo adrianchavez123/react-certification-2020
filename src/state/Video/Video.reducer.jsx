@@ -39,7 +39,6 @@ function reducer(state, action) {
         videos: [],
       };
     }
-
     default:
       throw new Error('Unkown action');
   }

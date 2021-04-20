@@ -9,6 +9,9 @@ const initialState = {
   theme: 'light',
   favoriteVideos: [],
   showMenu: false,
+  name: '',
+  avatarUrl: '',
+  closeModal: false,
 };
 
 jest.mock('./User.reducer.jsx', () => jest.fn());
@@ -29,6 +32,9 @@ describe('useUserAccount', () => {
       theme: 'light',
       favoriteVideos: [],
       showMenu: false,
+      name: '',
+      avatarUrl: '',
+      closeModal: false,
     });
   });
   it('throws expection when context is null', async () => {
@@ -72,6 +78,9 @@ describe('test reducer responses', () => {
       theme: 'light',
       favoriteVideos: [],
       showMenu: false,
+      name: '',
+      avatarUrl: '',
+      closeModal: false,
     });
   });
 });
@@ -85,5 +94,6 @@ describe('actions', () => {
     clearFavoriteVideos: 'CLEAR_FAVORITE_VIDEOS',
     setTheme: 'SET_THEME',
     showMenu: 'SHOW_MENU',
+    closeLoginModal: 'CLOSE_LOGIN_MODAL',
   });
 });

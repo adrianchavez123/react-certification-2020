@@ -6,6 +6,9 @@ const initialState = {
   theme: 'light',
   favoriteVideos: [],
   showMenu: false,
+  name: '',
+  avatarUrl: '',
+  closeModal: false,
 };
 
 const initializer = (initialValue = initialState) =>

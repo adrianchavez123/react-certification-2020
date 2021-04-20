@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import Header from '../../components/Header';
@@ -6,14 +7,27 @@ import { StyledButton } from '../../components/Button/Button.styles';
 import PrivateAsideMenu from '../../components/PrivateAsideMenu';
 import VideoList from '../../components/VideoList';
 import { useUserAccount, actions } from '../../state/User';
+import { useVideo, actions as videoActions } from '../../state/Video';
 import { Title, FavoriteSection, FavoritesContainer } from './Favorites.styles';
 
 function Favorites() {
+  const history = useHistory();
+  const { dispatch: videoDispatcher } = useVideo();
   const {
     state: { favoriteVideos, authenticated, showMenu },
     dispatch,
   } = useUserAccount();
 
+  if (!authenticated) {
+    videoDispatcher({
+      type: videoActions.displayError,
+      payload: {
+        type: 'danger',
+        message: 'Only Authenticated users can go to favorites. :(',
+      },
+    });
+    history.push('/');
+  }
   const removeFavoriteVideo = (e, videoId) => {
     e.preventDefault();
     e.stopPropagation();
