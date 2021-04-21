@@ -7,16 +7,21 @@ function reducer(state, action) {
         ...state,
         authenticated: action.payload.authenticated,
         email: action.payload.email,
+        name: action.payload.name,
+        avatarUrl: action.payload.avatarUrl,
+        closeModal: true,
       };
     }
     case actions.logout: {
       return {
         ...state,
         authenticated: action.payload.authenticated || false,
-        email: action.payload.email || null,
+        email: action.payload.email || '',
         showMenu: action.payload.showMenu || false,
         favoriteVideos: [],
         theme: 'light',
+        name: '',
+        avatarUrl: '',
       };
     }
     case actions.addFavoriteVideo: {
@@ -50,6 +55,18 @@ function reducer(state, action) {
       return {
         ...state,
         showMenu: action.payload.showMenu,
+      };
+    }
+    case actions.closeLoginModal: {
+      return {
+        ...state,
+        closeModal: true,
+      };
+    }
+    case actions.openLoginModal: {
+      return {
+        ...state,
+        closeModal: false,
       };
     }
     default:

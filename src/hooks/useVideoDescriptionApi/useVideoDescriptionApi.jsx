@@ -1,11 +1,11 @@
 import { useEffect, useCallback, useState } from 'react';
 
-function useVideoPlayerApi({ type = 'SEARCH', payload = '' }) {
-  const [response, setResponse] = useState({});
+function useVideoDescriptionApi({ videoId }) {
+  const [video, setVideo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const buildVideoDetailsResponse = (data) => {
+  const buildVideoDetails = useCallback((data) => {
     const {
       title,
       description,
@@ -24,33 +24,24 @@ function useVideoPlayerApi({ type = 'SEARCH', payload = '' }) {
       views: viewCount,
       url,
     };
-  };
-
-  const buildResponse = useCallback(
-    (data) => {
-      return type === 'VIDEO_DETAILS' ? buildVideoDetailsResponse(data) : null;
-    },
-    [type]
-  );
+  }, []);
 
   const fetchVideoDetails = useCallback(async () => {
     setIsLoading(true);
 
-    if (!payload) {
+    if (!videoId) {
       setError("Please, make sure video's is correct.");
       return;
     }
     try {
-      let endPoint = `${process.env.REACT_APP_YOUTUBE_VIDEO_SEARCH_ENDPOINT}${payload}&key=${process.env.REACT_APP_YOUTUBE_DATA_KEY}`;
-      if (type === 'VIDEO_DETAILS') {
-        endPoint = `${process.env.REACT_APP_YOUTUBE_VIDEO_DETAILS_ENDPOINT}${payload}&key=${process.env.REACT_APP_YOUTUBE_DATA_KEY}`;
-      }
+      const endPoint = `${process.env.REACT_APP_YOUTUBE_VIDEO_DETAILS_ENDPOINT}${videoId}&key=${process.env.REACT_APP_YOUTUBE_DATA_KEY}`;
+
       const youtubeResponse = await fetch(endPoint);
       const data = await youtubeResponse.json();
       if (data?.items) {
         const [videoDetails] = data.items;
 
-        setResponse(buildResponse(videoDetails));
+        setVideo(buildVideoDetails(videoDetails));
       }
       if (data?.error) {
         throw new Error(data.error.message);
@@ -60,13 +51,13 @@ function useVideoPlayerApi({ type = 'SEARCH', payload = '' }) {
     } finally {
       setIsLoading(false);
     }
-  }, [payload, type, buildResponse]);
+  }, [videoId, buildVideoDetails]);
 
   useEffect(() => {
     fetchVideoDetails();
   }, [fetchVideoDetails]);
 
-  return { response, isLoading, error };
+  return { video, isLoading, error };
 }
 
-export default useVideoPlayerApi;
+export default useVideoDescriptionApi;

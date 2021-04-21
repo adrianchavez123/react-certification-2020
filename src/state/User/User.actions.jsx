@@ -6,4 +6,5 @@ export default {
   clearFavoriteVideos: 'CLEAR_FAVORITE_VIDEOS',
   setTheme: 'SET_THEME',
   showMenu: 'SHOW_MENU',
+  closeLoginModal: 'CLOSE_LOGIN_MODAL',
 };

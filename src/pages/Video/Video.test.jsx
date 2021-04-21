@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router';
 import Video from './Video.page';
 
 jest.mock('../../state/User', () => ({
-  useUserAccount: () => ({ state: { theme: 'light' } }),
+  useUserAccount: () => ({ state: { authenticated: true } }),
 }));
 jest.mock('../../state/Video', () => ({
   useVideo: () => ({ state: { alert: { mesagge: '', type: '' }, videos: [] } }),
@@ -31,7 +31,6 @@ describe('Video page is loaded', () => {
         <Video />
       </MemoryRouter>
     );
-
     const navigation = screen.getByRole('navigation');
 
     expect(navigation).toBeInTheDocument();

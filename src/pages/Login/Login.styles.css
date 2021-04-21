@@ -57,3 +57,8 @@
   border: none;
   border-radius: 3px;
 }
+
+.error-form {
+  font-size: 0.8rem;
+  color: #b70d0dc3;
+}

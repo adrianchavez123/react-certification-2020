@@ -11,6 +11,13 @@ const mockVideo = {
   dislikes: 0,
   views: 1,
 };
+jest.mock('../../state/User', () => ({
+  useUserAccount: () => ({
+    state: { favoriteVideos: [], authenticated: true, showMenu: true },
+    dispatch: () => {},
+  }),
+}));
+
 describe('VideoDescription component is well rendered', () => {
   it('renders the styled VideoDescription', () => {
     render(<VideoDescription video={mockVideo} />);

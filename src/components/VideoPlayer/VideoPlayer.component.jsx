@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useVideo, actions } from '../../state/Video';
 import { useUserAccount, actions as userActions } from '../../state/User';
-import useVideoPlayerApi from '../../hooks/useVideoPlayerApi';
+import useVideoDescriptionApi from '../../hooks/useVideoDescriptionApi';
 import VideoSuggestions from '../VideoSuggestions';
 import VideoWrapper from '../VideoWrapper/VideoWrapper.component';
 import VideoDescription from '../VideoDescription';
@@ -15,14 +16,14 @@ import {
 } from './VideoPlayer.styles';
 
 function VideoPlayer({ videoId, showMenu }) {
+  const history = useHistory();
   const { dispatch } = useVideo();
   const {
     state: { favoriteVideos },
     dispatch: userDispatcher,
   } = useUserAccount();
-  const { response: video, isLoading, error } = useVideoPlayerApi({
-    type: 'VIDEO_DETAILS',
-    payload: videoId,
+  const { video, isLoading, error } = useVideoDescriptionApi({
+    videoId,
   });
 
   const [favoriteVerb, setFavoriteVerb] = useState('add to');
@@ -36,15 +37,7 @@ function VideoPlayer({ videoId, showMenu }) {
       {` ${favoriteVerb} Favorites`}
     </>
   );
-  if (error) {
-    dispatch({
-      type: actions.displayError,
-      payload: {
-        type: 'danger',
-        message: error,
-      },
-    });
-  }
+
   const updateFavoriteList = () => {
     const videoIndex = favoriteVideos.findIndex((v) => {
       return v.videoId === videoId;
@@ -72,10 +65,23 @@ function VideoPlayer({ videoId, showMenu }) {
   };
 
   useEffect(() => {
+    if (error) {
+      dispatch({
+        type: actions.displayError,
+        payload: {
+          type: 'danger',
+          message: `Something when wrong, Error(${error}), please watch another video.`,
+        },
+      });
+      history.push('/');
+    }
+  }, [error, dispatch, history]);
+
+  useEffect(() => {
     const videoIndex = favoriteVideos.findIndex((v) => {
       return v.videoId === videoId;
     });
-    if (videoIndex > 0) {
+    if (videoIndex > -1) {
       setFavoriteVerb('remove from');
     } else {
       setFavoriteVerb('add to');
