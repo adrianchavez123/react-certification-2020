@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useVideo, actions } from '../../state/Video';
 import { useUserAccount, actions as userActions } from '../../state/User';
-import useVideoPlayerApi from '../../hooks/useVideoPlayerApi';
+import useVideoDescriptionApi from '../../hooks/useVideoDescriptionApi';
 import VideoSuggestions from '../VideoSuggestions';
 import VideoWrapper from '../VideoWrapper/VideoWrapper.component';
 import VideoDescription from '../VideoDescription';
@@ -22,9 +22,8 @@ function VideoPlayer({ videoId, showMenu }) {
     state: { favoriteVideos },
     dispatch: userDispatcher,
   } = useUserAccount();
-  const { response: video, isLoading, error } = useVideoPlayerApi({
-    type: 'VIDEO_DETAILS',
-    payload: videoId,
+  const { video, isLoading, error } = useVideoDescriptionApi({
+    videoId,
   });
 
   const [favoriteVerb, setFavoriteVerb] = useState('add to');

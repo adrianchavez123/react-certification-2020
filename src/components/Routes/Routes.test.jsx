@@ -1,7 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { screen, render } from '@testing-library/react';
-import VideoProvider from '../../state/Video';
 import Routes from './Routes.component';
 
 jest.mock('../../state/Video', () => ({

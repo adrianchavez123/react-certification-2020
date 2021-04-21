@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react-hooks';
-import useVideoPlayerApi from './useVideoPlayerApi';
+import useVideoDescriptionApi from './useVideoDescriptionApi';
 
 const video = {
   title: 'Video title',
@@ -8,14 +8,9 @@ const video = {
 };
 
 const videoDetails = {
-  type: 'VIDEO_DETAILS',
-  payload: 'Po3VwR_NNGk',
+  videoId: 'Po3VwR_NNGk',
 };
 
-const searchVideo = {
-  type: 'SEARCH',
-  payload: 'wizeline',
-};
 const getControlledPromise = () => {
   let deferred;
   const promise = new Promise((resolve, reject) => {
@@ -24,20 +19,14 @@ const getControlledPromise = () => {
   return { deferred, promise };
 };
 
-describe('useVideoPlayerApi', () => {
+describe('useVideoDescriptionApi', () => {
   it('fetches the video details', async () => {
     global.fetch = jest.fn();
 
-    await act(async () => renderHook(() => useVideoPlayerApi(videoDetails)));
+    await act(async () => renderHook(() => useVideoDescriptionApi(videoDetails)));
 
     expect(global.fetch).toBeCalledWith(
-      `${process.env.REACT_APP_YOUTUBE_VIDEO_DETAILS_ENDPOINT}${videoDetails.payload}&key=${process.env.REACT_APP_YOUTUBE_DATA_KEY}`
-    );
-
-    await act(async () => renderHook(() => useVideoPlayerApi(searchVideo)));
-
-    expect(global.fetch).toBeCalledWith(
-      `${process.env.REACT_APP_YOUTUBE_VIDEO_DETAILS_ENDPOINT}${searchVideo.payload}&key=${process.env.REACT_APP_YOUTUBE_DATA_KEY}`
+      `${process.env.REACT_APP_YOUTUBE_VIDEO_DETAILS_ENDPOINT}${videoDetails.videoId}&key=${process.env.REACT_APP_YOUTUBE_DATA_KEY}`
     );
   });
 
@@ -48,7 +37,7 @@ describe('useVideoPlayerApi', () => {
       global.fetch = jest.fn(() => promise);
 
       const { result, waitForNextUpdate } = renderHook(() =>
-        useVideoPlayerApi(videoDetails)
+        useVideoDescriptionApi(videoDetails)
       );
 
       expect(result.current.isLoading).toBe(true);
@@ -65,14 +54,14 @@ describe('useVideoPlayerApi', () => {
       global.fetch = jest.fn(() => promise);
 
       const { result, waitForNextUpdate } = renderHook(() =>
-        useVideoPlayerApi(videoDetails)
+        useVideoDescriptionApi(videoDetails)
       );
 
       deferred.resolve({ json: () => video });
 
       await waitForNextUpdate();
 
-      expect(result.current).toHaveProperty('response');
+      expect(result.current).toHaveProperty('video');
     });
   });
 
@@ -85,7 +74,7 @@ describe('useVideoPlayerApi', () => {
       });
 
       const { result, waitForNextUpdate } = renderHook(() =>
-        useVideoPlayerApi(videoDetails)
+        useVideoDescriptionApi(videoDetails)
       );
       await waitForNextUpdate();
 
