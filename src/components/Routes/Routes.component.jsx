@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
-import VideoProvider from '../../state/Video';
 import HomePage from '../../pages/Home';
 import VideoPage from '../../pages/Video';
 import LoginPage from '../../pages/Login';
@@ -25,28 +24,17 @@ function Routes() {
           <LogoutPage />
         </Route>
         <Private exact path="/secret">
-          <VideoProvider>
-            <SecretPage />
-          </VideoProvider>
+          <SecretPage />
         </Private>
-
         <Route exact path="/favorites">
-          <VideoProvider>
-            <FavoritesPage />
-          </VideoProvider>
+          <FavoritesPage />
         </Route>
-
         <Route exact path="/">
-          <VideoProvider>
-            <HomePage />
-          </VideoProvider>
+          <HomePage />
         </Route>
         <Route exact path="/:videoId?">
-          <VideoProvider>
-            <VideoPage />
-          </VideoProvider>
+          <VideoPage />
         </Route>
-
         <Route path="*">
           <NotFound />
         </Route>

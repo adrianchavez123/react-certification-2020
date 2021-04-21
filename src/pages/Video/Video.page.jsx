@@ -18,12 +18,12 @@ function Video() {
     state: { authenticated, showMenu },
   } = useUserAccount();
 
-  const updateGrid = authenticated && showMenu;
+  const updateGridLayout = authenticated && showMenu;
   return (
     <div>
       <Header />
       {alert.message ? <Dialog message={alert.message} type={alert.type} /> : null}
-      <Main updateGrid={updateGrid}>
+      <Main updateGridLayout={updateGridLayout}>
         {showMenu ? <PrivateAsideMenu /> : null}
         <VideoPlayer videoId={videoId} showMenu={showMenu} />
       </Main>

@@ -7,6 +7,7 @@ import './Login.styles.css';
 function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [status, setStatus] = useState('no-action');
   const { state, dispatch } = useUserAccount();
 
   const history = useHistory();
@@ -32,16 +33,18 @@ function LoginPage() {
         });
         history.goBack();
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        setStatus('non-registered');
       });
   }
-
   return (
     <div data-testid="login-form" className="login-page">
       <section className="login">
         <h1>Welcome back!</h1>
         <form onSubmit={authenticate} className="login-form">
+          {status === 'non-registered' && (
+            <span className="error-form">You are not a member</span>
+          )}
           <div className="form-group">
             <label htmlFor="username">
               <strong>username </strong>

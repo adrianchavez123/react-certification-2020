@@ -9,7 +9,11 @@ jest.mock('../../state/Video', () => ({
 
 jest.mock('../../state/User', () => ({
   useUserAccount: () => ({
-    state: { favoriteVideos: [], authenticated: true, showMenu: true },
+    state: {
+      favoriteVideos: [{ videoId: 'w7ejDZ8SWv8', title: 'React JS Crash Course 2021' }],
+      authenticated: true,
+      showMenu: true,
+    },
     dispatch: () => {},
   }),
 }));
@@ -38,5 +42,23 @@ describe('Favorites page is loaded', () => {
     expect(
       screen.getByRole('heading', { name: /Favorite videos!/i })
     ).toBeInTheDocument();
+  });
+
+  it('displays remove all button', () => {
+    render(
+      <MemoryRouter>
+        <Favorites />
+      </MemoryRouter>
+    );
+    expect(screen.getByRole('button', { name: /Remove all/i })).toBeInTheDocument();
+  });
+
+  it("displays favorite's list", () => {
+    render(
+      <MemoryRouter>
+        <Favorites />
+      </MemoryRouter>
+    );
+    expect(screen.getByText(/React JS Crash Course 2021/i)).toBeInTheDocument();
   });
 });

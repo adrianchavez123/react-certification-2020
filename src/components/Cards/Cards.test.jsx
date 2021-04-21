@@ -8,7 +8,7 @@ const mockUseVideo = [
   {
     id: { videoId: 'Po3VwR_NNGk' },
     snippet: {
-      title: 'Video title',
+      title: 'Video title1',
       description: 'description',
       thumbnails: { high: { url: null } },
     },
@@ -16,7 +16,7 @@ const mockUseVideo = [
   {
     id: { videoId: 'Po2VwR_NNGk' },
     snippet: {
-      title: 'Video title',
+      title: 'Video title2',
       description: 'description',
       thumbnails: { high: { url: null } },
     },
@@ -48,5 +48,6 @@ describe('All the mockup videos are renders as cards', () => {
       </MemoryRouter>
     );
     expect(screen.getAllByRole('link').length).toBe(2);
+    expect(screen.getByText(/Video title1/i)).toBeInTheDocument();
   });
 });

@@ -5,6 +5,7 @@ import { useUserAccount } from '../../state/User';
 import Routes from '../Routes';
 import Layout from '../Layout';
 import themes from './Theme';
+import VideoProvider from '../../state/Video';
 
 function App() {
   const {
@@ -15,7 +16,9 @@ function App() {
     <BrowserRouter>
       <ThemeProvider theme={themes[theme]}>
         <Layout>
-          <Routes />
+          <VideoProvider>
+            <Routes />
+          </VideoProvider>
         </Layout>
       </ThemeProvider>
     </BrowserRouter>
